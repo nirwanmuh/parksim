@@ -40,94 +40,70 @@ if "session_id" not in st.session_state:
     st.session_state.user_agent = st.experimental_get_query_params().get("ua", ["unknown"])[0]
     log_event("page_visit")
 
-# === CSS Kustom untuk tampilan modern ===
+# === CSS minimal modern ===
 st.markdown("""
-    <style>
-    body {
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-        color: white;
-        font-family: 'Poppins', sans-serif;
-    }
-    .main {
-        text-align: center;
-    }
-    .profile-pic {
-        width: 130px;
-        height: 130px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 4px solid #00FFB3;
-        margin-bottom: 10px;
-        box-shadow: 0 0 15px rgba(0,255,179,0.4);
-    }
-    h1 {
-        font-weight: 600;
-        margin-bottom: 0;
-    }
-    .bio {
-        font-size: 15px;
-        color: #dcdcdc;
-        margin-bottom: 30px;
-    }
-    .link-card {
-        background-color: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 14px;
-        padding: 14px;
-        margin: 10px auto;
-        width: 80%;
-        max-width: 400px;
-        transition: all 0.3s ease-in-out;
-        text-align: center;
-    }
-    .link-card:hover {
-        transform: translateY(-3px);
-        background-color: rgba(255,255,255,0.15);
-        box-shadow: 0 0 15px rgba(0,255,179,0.3);
-    }
-    a {
-        text-decoration: none;
-        color: #00FFB3;
-        font-weight: 500;
-        font-size: 17px;
-    }
-    footer {
-        margin-top: 40px;
-        font-size: 13px;
-        color: #bbb;
-    }
-    </style>
+<style>
+body {
+    background-color: #0f1117;
+    color: #e6e6e6;
+    font-family: 'Poppins', sans-serif;
+}
+.main { text-align: center; }
+.profile-pic {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 2px solid #444;
+    margin-bottom: 10px;
+}
+h1 { font-weight: 600; }
+.link-button {
+    display: block;
+    width: 80%;
+    max-width: 380px;
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 10px auto;
+    color: #00e0a7;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.link-button:hover {
+    background: #00e0a7;
+    color: black;
+}
+footer {
+    margin-top: 30px;
+    font-size: 12px;
+    color: #777;
+}
+</style>
 """, unsafe_allow_html=True)
 
 # === Konten utama ===
 st.markdown("""
-    <div class="main">
-        <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" class="profile-pic" alt="Profile Picture">
-        <h1>Muhammad Nirwandha</h1>
-        <p class="bio">🚢 Smart Port & AI Developer | Data Storyteller | Automation Enthusiast</p>
-    </div>
+<div class="main">
+    <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" class="profile-pic">
+    <h1>Muhammad Nirwandha</h1>
+    <p>🚢 Smart Port & AI Developer | Data Storyteller | Automation Enthusiast</p>
+</div>
 """, unsafe_allow_html=True)
 
-# === Kartu Tautan ===
-links = [
-    ("💼 LinkedIn", "https://linkedin.com/in/username"),
-    ("🐙 GitHub", "https://github.com/username"),
-    ("📸 Instagram", "https://instagram.com/username"),
-    ("📧 Email", "mailto:youremail@example.com"),
-    ("🌐 Portfolio", "https://your-portfolio.com"),
-]
+# === Link interaktif dengan logging ===
+links = {
+    "💼 LinkedIn": "https://linkedin.com/in/username",
+    "🐙 GitHub": "https://github.com/username",
+    "🌐 Portfolio": "https://your-portfolio.com",
+    "📧 Email": "mailto:youremail@example.com",
+}
 
-for text, url in links:
-    st.markdown(f"""
-        <div class="link-card">
-            <a href="{url}" target="_blank">{text}</a>
-        </div>
-    """, unsafe_allow_html=True)
+for name, url in links.items():
+    if st.button(name, key=url):
+        log_event("link_click", link=name)
+        st.markdown(f"<meta http-equiv='refresh' content='0; url={url}'>", unsafe_allow_html=True)
 
 # === Footer ===
 st.markdown("""
-    <footer>
-        Made with ❤️ using <b>Streamlit</b><br>
-        © 2025 Nirwandha
-    </footer>
+<footer>Made with ❤️ using Streamlit</footer>
 """, unsafe_allow_html=True)
