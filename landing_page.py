@@ -1,83 +1,100 @@
 import streamlit as st
 
-# === Konfigurasi dasar halaman ===
-st.set_page_config(page_title="Nirwandha Links", page_icon="✨", layout="centered")
+# === KONFIGURASI HALAMAN ===
+st.set_page_config(page_title="Nirwandha Links", page_icon="⚡", layout="centered")
 
-# === CSS Kustom untuk tampilan modern ===
+# === CSS FUTURISTIK ===
 st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap');
+
     body {
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-        color: white;
-        font-family: 'Poppins', sans-serif;
+        background: radial-gradient(circle at 10% 20%, #0f0f1b 0%, #080810 100%);
+        color: #e0e0e0;
+        font-family: 'Rajdhani', sans-serif;
     }
     .main {
         text-align: center;
+        margin-top: 2rem;
     }
     .profile-pic {
-        width: 130px;
-        height: 130px;
+        width: 150px;
+        height: 150px;
         border-radius: 50%;
-        object-fit: cover;
-        border: 4px solid #00FFB3;
-        margin-bottom: 10px;
-        box-shadow: 0 0 15px rgba(0,255,179,0.4);
+        border: 3px solid #00ffe0;
+        box-shadow: 0 0 25px #00ffe0;
+        margin-bottom: 15px;
+        transition: transform 0.4s ease;
+    }
+    .profile-pic:hover {
+        transform: scale(1.05);
     }
     h1 {
-        font-weight: 600;
-        margin-bottom: 0;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2rem;
+        color: #00ffe0;
+        text-shadow: 0 0 10px #00ffe0;
     }
     .bio {
+        color: #a0a0a0;
         font-size: 15px;
-        color: #dcdcdc;
         margin-bottom: 30px;
     }
     .link-card {
-        background-color: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(0, 255, 224, 0.4);
         border-radius: 14px;
         padding: 14px;
         margin: 10px auto;
-        width: 80%;
-        max-width: 400px;
-        transition: all 0.3s ease-in-out;
-        text-align: center;
+        width: 85%;
+        max-width: 420px;
+        transition: all 0.35s ease-in-out;
+        box-shadow: 0 0 10px rgba(0, 255, 224, 0.15);
     }
     .link-card:hover {
-        transform: translateY(-3px);
-        background-color: rgba(255,255,255,0.15);
-        box-shadow: 0 0 15px rgba(0,255,179,0.3);
+        background: rgba(0, 255, 224, 0.15);
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 0 25px rgba(0, 255, 224, 0.4);
     }
     a {
         text-decoration: none;
-        color: #00FFB3;
-        font-weight: 500;
-        font-size: 17px;
+        color: #00ffe0;
+        font-family: 'Orbitron', sans-serif;
+        letter-spacing: 1px;
+        font-size: 16px;
     }
     footer {
-        margin-top: 40px;
-        font-size: 13px;
-        color: #bbb;
+        margin-top: 50px;
+        font-size: 12px;
+        color: #888;
+    }
+    .glow {
+        animation: pulse 2s infinite alternate;
+    }
+    @keyframes pulse {
+        from { text-shadow: 0 0 5px #00ffe0; }
+        to { text-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0; }
     }
     </style>
 """, unsafe_allow_html=True)
 
-# === Konten utama ===
+# === KONTEN HALAMAN ===
 st.markdown("""
     <div class="main">
         <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" class="profile-pic" alt="Profile Picture">
-        <h1>Muhammad Nirwandha</h1>
-        <p class="bio">🚢 Smart Port & AI Developer | Data Storyteller | Automation Enthusiast</p>
+        <h1 class="glow">MUHAMMAD NIRWANDHA</h1>
+        <p class="bio">🚀 AI Engineer | Smart Port Innovator | Automation Visionary</p>
     </div>
 """, unsafe_allow_html=True)
 
-# === Kartu Tautan ===
+# === TAUTAN ===
 links = [
     ("💼 LinkedIn", "https://linkedin.com/in/username"),
     ("🐙 GitHub", "https://github.com/username"),
     ("📸 Instagram", "https://instagram.com/username"),
-    ("📧 Email", "mailto:youremail@example.com"),
     ("🌐 Portfolio", "https://your-portfolio.com"),
+    ("📫 Email", "mailto:youremail@example.com"),
 ]
 
 for text, url in links:
@@ -87,10 +104,10 @@ for text, url in links:
         </div>
     """, unsafe_allow_html=True)
 
-# === Footer ===
+# === FOOTER ===
 st.markdown("""
     <footer>
-        Made with ❤️ using <b>Streamlit</b><br>
-        © 2025 Nirwandha
+        ⚡ Designed in 2025 — <span style="color:#00ffe0;">Futuristic Linktree</span><br>
+        Built with ❤️ using Streamlit
     </footer>
 """, unsafe_allow_html=True)
