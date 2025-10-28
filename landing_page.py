@@ -1,7 +1,44 @@
 import streamlit as st
+import pandas as pd
+import datetime
+import uuid
+import os
 
-# === Konfigurasi dasar halaman ===
+# === Konfigurasi dasar ===
 st.set_page_config(page_title="Nirwandha Links", page_icon="✨", layout="centered")
+
+# === Buat file log kalau belum ada ===
+LOG_FILE = "access_log.csv"
+if not os.path.exists(LOG_FILE):
+    df = pd.DataFrame(columns=["session_id", "timestamp", "event", "link", "ip_address", "user_agent"])
+    df.to_csv(LOG_FILE, index=False)
+
+# === Fungsi untuk mencatat log ===
+def log_event(event, link=None):
+    try:
+        ip = st.session_state.get("ip_address", "unknown")
+        ua = st.session_state.get("user_agent", "unknown")
+
+        log_data = {
+            "session_id": st.session_state.session_id,
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "event": event,
+            "link": link or "",
+            "ip_address": ip,
+            "user_agent": ua,
+        }
+
+        df = pd.DataFrame([log_data])
+        df.to_csv(LOG_FILE, mode="a", header=False, index=False)
+    except Exception as e:
+        st.error(f"Gagal mencatat log: {e}")
+
+# === Buat session unik untuk tiap pengunjung ===
+if "session_id" not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())
+    st.session_state.ip_address = st.experimental_get_query_params().get("ip", ["unknown"])[0]
+    st.session_state.user_agent = st.experimental_get_query_params().get("ua", ["unknown"])[0]
+    log_event("page_visit")
 
 # === CSS Kustom untuk tampilan modern ===
 st.markdown("""
