@@ -1,118 +1,63 @@
 import streamlit as st
 
-st.set_page_config(page_title="Nirwandha | Links", page_icon="🌿", layout="centered")
+# === Konfigurasi dasar halaman ===
+st.set_page_config(page_title="Nirwandha Links", page_icon="✨", layout="centered")
 
-# === CSS FIXED DARK/LIGHT MODE ===
+# === CSS Kustom untuk tampilan modern ===
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
-    html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif;
-        scroll-behavior: smooth;
+    body {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: white;
+        font-family: 'Poppins', sans-serif;
     }
-
-    /* === MODE TERANG === */
-    @media (prefers-color-scheme: light) {
-        body {
-            background-color: #fafafa;
-            color: #1a1a1a;
-        }
-        .link-card {
-            background: #ffffff;
-            color: #1a1a1a;
-            border: 1px solid #e5e5e5;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .link-card:hover {
-            background: #f7f7f7;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-        }
-        .bio { color: #555; }
-        footer { color: #888; }
-    }
-
-    /* === MODE GELAP === */
-    @media (prefers-color-scheme: dark) {
-        body {
-            background-color: #0d0d0d;
-            color: #f5f5f5;
-        }
-        .link-card {
-            background: #1a1a1a;
-            color: #f5f5f5;
-            border: 1px solid #2a2a2a;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .link-card:hover {
-            background: #222;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-        .bio { color: #aaa; }
-        footer { color: #777; }
-    }
-
     .main {
         text-align: center;
-        padding-top: 3rem;
     }
     .profile-pic {
-        width: 120px;
-        height: 120px;
+        width: 130px;
+        height: 130px;
         border-radius: 50%;
         object-fit: cover;
+        border: 4px solid #00FFB3;
         margin-bottom: 10px;
-        border: 1px solid rgba(255,255,255,0.1);
-        opacity: 0;
-        animation: fadeIn 1s forwards;
+        box-shadow: 0 0 15px rgba(0,255,179,0.4);
     }
     h1 {
         font-weight: 600;
-        margin-top: 10px;
-        margin-bottom: 5px;
-        opacity: 0;
-        animation: fadeUp 1s forwards;
+        margin-bottom: 0;
     }
     .bio {
         font-size: 15px;
-        margin-bottom: 25px;
-        opacity: 0;
-        animation: fadeUp 1.4s forwards;
+        color: #dcdcdc;
+        margin-bottom: 30px;
     }
     .link-card {
-        border-radius: 12px;
+        background-color: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 14px;
         padding: 14px;
         margin: 10px auto;
-        width: 85%;
-        max-width: 420px;
+        width: 80%;
+        max-width: 400px;
+        transition: all 0.3s ease-in-out;
         text-align: center;
-        transition: all 0.25s ease;
-        opacity: 0;
-        animation: fadeUp 1.6s forwards;
+    }
+    .link-card:hover {
+        transform: translateY(-3px);
+        background-color: rgba(255,255,255,0.15);
+        box-shadow: 0 0 15px rgba(0,255,179,0.3);
     }
     a {
         text-decoration: none;
-        color: inherit;
+        color: #00FFB3;
         font-weight: 500;
-        font-size: 16px;
-        letter-spacing: 0.2px;
+        font-size: 17px;
     }
     footer {
-        margin-top: 60px;
+        margin-top: 40px;
         font-size: 13px;
-        padding-bottom: 3rem;
-        opacity: 0;
-        animation: fadeIn 2s forwards;
-    }
-
-    /* === Animasi === */
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(15px); }
-        to { opacity: 1; transform: translateY(0); }
+        color: #bbb;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -122,17 +67,17 @@ st.markdown("""
     <div class="main">
         <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" class="profile-pic" alt="Profile Picture">
         <h1>Muhammad Nirwandha</h1>
-        <p class="bio">Data & AI Enthusiast · Smart Port Innovator · Automation Visionary</p>
+        <p class="bio">🚢 Smart Port & AI Developer | Data Storyteller | Automation Enthusiast</p>
     </div>
 """, unsafe_allow_html=True)
 
-# === Daftar tautan ===
+# === Kartu Tautan ===
 links = [
     ("💼 LinkedIn", "https://linkedin.com/in/username"),
     ("🐙 GitHub", "https://github.com/username"),
-    ("🌐 Portfolio", "https://your-portfolio.com"),
     ("📸 Instagram", "https://instagram.com/username"),
-    ("✉️ Email", "mailto:youremail@example.com"),
+    ("📧 Email", "mailto:youremail@example.com"),
+    ("🌐 Portfolio", "https://your-portfolio.com"),
 ]
 
 for text, url in links:
@@ -144,8 +89,8 @@ for text, url in links:
 
 # === Footer ===
 st.markdown("""
-    <footer style="text-align:center;">
-        © 2025 — Designed with simplicity<br>
-        Built with ❤️ using <b>Streamlit</b>
+    <footer>
+        Made with ❤️ using <b>Streamlit</b><br>
+        © 2025 Nirwandha
     </footer>
 """, unsafe_allow_html=True)
